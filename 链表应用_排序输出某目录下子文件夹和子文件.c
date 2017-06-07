@@ -31,7 +31,8 @@ g_pNodeStru insert_location(g_pNodeStru pHead, g_pNodeStru newNode)
         pHead = newNode;
         return pHead;
     }
-    /* 既然新节点没有比首节点小,且只有一个节点,就将新节点插到首节点后面 */
+
+    /* [>既然新节点没有比首节点小,且只有一个节点,就将新节点插到首节点后面<]
     if (NULL == pHead->t_pNodeStru)
     {
         pHead->t_pNodeStru = newNode;
@@ -40,8 +41,9 @@ g_pNodeStru insert_location(g_pNodeStru pHead, g_pNodeStru newNode)
 
     g_pNodeStru preNode = pHead;
     g_pNodeStru comparator = preNode->t_pNodeStru;
-    /* 中断迭代的情况是遇到比新节点大的节点或者comparator已经是尾节点了,再次迭代因为
-    下一轮comparator为NULL,comparator->t_pNodeStru就会出现错误 */
+
+    [>中断迭代的情况是遇到比新节点大的节点或者comparator已经是尾节点了,再次迭代因为
+    下一轮comparator为NULL,comparator->t_pNodeStru就会出现错误<]
     while(strcmp(newNode->t_pName, comparator->t_pName) > 0 && NULL != comparator ->t_pNodeStru)
     {
         preNode = comparator;
@@ -56,7 +58,25 @@ g_pNodeStru insert_location(g_pNodeStru pHead, g_pNodeStru newNode)
     {
         comparator->t_pNodeStru= newNode;
     }
+     */
 
+    /* 上面的写法是比较到comparator为次未节点的情况,下面的写法是比较到comparator为NULL,
+    为什么comparator能迭代到尾节点NULL,说明上一轮比较新节点和次尾节点即旧的comparator
+    还是新节点大 */
+    while(NULL != comparator->t_pNodeStru)
+    {
+        if (strcmp(newNode->t_pName, comparator->t_pName) > 0)
+        {
+            preNode = comparator;
+            comparator = comparator->t_pNodeStru;
+        }
+        else
+            break;
+    }
+    /* 如果是因为comparator为NULL而终止的迭代,那么因为新节点还是比次尾节点大,并且
+    comparator指向NULL,使用下面的语句还是可以让新节点成为新的尾节点的. */
+    preNode->t_pNodeStru = newNode;
+    newNode->t_pNodeStru = comparator;
     return pHead;
 }
 
