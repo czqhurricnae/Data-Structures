@@ -1,3 +1,20 @@
+/**
+ *
+ * @copyright:
+ * @file: 链表应用_排序输出某目录下子文件夹和子文件.c
+ * @since: 2017-08-04
+ * @author: czq | 7160844@qq.com
+ * @description:
+ *     链表应用_排序输出某目录下子文件夹和子文件
+ * @usage:
+ * @others:
+ * @TODO:
+ * @Revision History:
+ * Date            Rel Ver.        Notes
+ * 2017-08-04        1.0             开始创建
+ *
+ **/
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <dirent.h>
