@@ -25,7 +25,6 @@ void listInit(List *list, void (destroy)(void *data))
     return ;
 }
 
-
 /**
  * Function: listDestroy
  * Description:
