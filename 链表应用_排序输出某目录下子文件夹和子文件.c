@@ -107,6 +107,7 @@ int main(int argc, char *argv[])
         }
         printf("未排序: %s\n", pDirectoryEntry->d_name);
         pNode newNode = (pNode)malloc(sizeof(strNode));
+
         /* 不必写成 int len = strlen(pDirectoryEntry->d_name[0]); */
         int len = strlen(pDirectoryEntry->d_name);
         newNode->pName = malloc(len + 1);

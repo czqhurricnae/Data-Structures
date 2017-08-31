@@ -25,7 +25,7 @@ typedef struct NODE
     struct NODE *pNext;
 } *pNode, strNode;
 
-pNode insertHead(pNode pFirst, pNode pNewNode)
+pNode insertFirst(pNode pFirst, pNode pNewNode)
 {
     if (NULL == pNewNode)
     {
@@ -64,6 +64,7 @@ pNode appendTail(pNode pFirst, pNode pNewNode)
             pNewNode->pNext = NULL;
         }
     }
+
     return pFirst;
 }
 
@@ -79,17 +80,16 @@ pNode deleteElement(pNode pFirst, int data)
         pFirst = pFirst->pNext;
     }
 
-    /* 必须要判断pFirst指向的是否为空指针,否则如果是只有一个
-    元素的链表,并且该唯一原始值不是要删除的,此时comparator为空
-    comparator->pNext是会导致块错误的. */
+    /* 必须要判断pNode comparator = pFirst->pNext指向的是否为空指针,否则如果是只有一个元素
+    的链表,并且该唯一原始值不是要删除的,此时comparator为空,comparator->pNext是会导致块错误的. */
     else if (NULL != pFirst->pNext)
     {
         pNode preNode = pFirst;
-        pNode comparator = pFirst->pNext;
+        pNode comparator = preNode->pNext;
         while (NULL != comparator->pNext && data != comparator->iData)
         {
             preNode = comparator;
-            comparator = comparator->pNext;
+            comparator = preNode->pNext;
         }
 
         if (data == comparator->iData)
@@ -154,17 +154,19 @@ pNode createList(void)
     {
         printf("请输入第%d个节点的值: ", i+1);
         scanf("%d", &data);
-        /* pNewNode = (pNode)malloc(sizeof(strNode));
-        pNewNode也必须使用pNode进行声明,否则提示错误如下:
-        Use of undeclared identifier 'pNewNode' */
 
+        /* pNewNode = (pNode)malloc(sizeof(strNode));pNewNode也必须使用pNode进行声明,
+           否则提示错误如下:Use of undeclared identifier 'pNewNode' */
         pNode pNewNode = (pNode)malloc(sizeof(strNode));
         pNewNode->pNext = NULL;
-        pNewNode->iData = data;
+
         /* pNewNode->iData = rand() % 50; */
-        pFirst = insertHead(pFirst, pNewNode);
+        pNewNode->iData = data;
+
+        pFirst = insertFirst(pFirst, pNewNode);
         /* pFirst = appendTail(pHead, pNewNode); */
     }
+
     return pFirst;
 }
 
@@ -177,5 +179,6 @@ int main()
     scanf("%d", &deleteData);
     pFirst = deleteElement(pFirst, deleteData);
     traverseLinkList(pFirst);
+
     return 0;
 }
