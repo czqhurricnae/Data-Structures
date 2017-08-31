@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-
 #include "linkList.h"
 
 /**
@@ -24,7 +23,6 @@ void listInit(List *list, void (destroy)(void *data))
 
     return ;
 }
-
 
 /**
  * Function: listDestroy
