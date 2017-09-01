@@ -44,7 +44,6 @@ void listDestroy(List *list)
 {
     void *data;
 
-    /* Remove each element. */
     while (listSize(list) > 0)
     {
         if (0 == listRemoveNext(list, NULL, (const void **)&data)
@@ -80,16 +79,13 @@ int listInsertNext(List *list, ListElmt *element, const void *data)
 {
    ListElmt *newElement;
 
-   /* Allocate storage for the element. */
    if (NULL != (newElement = (ListElmt *)malloc(sizeof(ListElmt))))
        return -1;
 
-   /* Insert the element into the list. */
    newElement->data = (void *)data;
 
    if (NULL == element)
    {
-      /* Handle insertion at the head of the list. */
        /* 当插入的元素位于链表末尾时, 必须更新链表数据结构的tail成员使其指向新的节点 */
       if (0 == listSize(list))
       {
@@ -101,7 +97,6 @@ int listInsertNext(List *list, ListElmt *element, const void *data)
    }
    else
    {
-       /* Handle insertion somewhere other than at the head. */
        if (NULL == element->next)
        {
            list->tail = newElement;
@@ -111,7 +106,6 @@ int listInsertNext(List *list, ListElmt *element, const void *data)
        element->next = newElement;
    }
 
-   /* Adjust the size of the list to account for the inserted element. */
    list->size++;
 
    return 0;
@@ -142,10 +136,8 @@ int listRemoveNext(List *list, ListElmt *element, const void **data)
     {
         return -1;
     }
-    /* Remove the element from the list. */
     if (NULL == element)
     {
-        /* Handle removal from the head of the list. */
         *data = list->head->data;
         oldElement = list->head;
 
@@ -160,7 +152,6 @@ int listRemoveNext(List *list, ListElmt *element, const void **data)
     }
     else
     {
-        /* Handle removal from somewhere other than the head. */
         if (NULL == element->next)
             return -1;
 
@@ -174,10 +165,8 @@ int listRemoveNext(List *list, ListElmt *element, const void **data)
         }
     }
 
-    /* Free the storage allocated by the abstract datatype. */
     free(oldElement);
 
-    /* Adjust the size of the list to account for the removed element. */
     list->size--;
 
     return 0;
