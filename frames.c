@@ -5,7 +5,7 @@
  * @since: 2017-09-01
  * @author: czq | 7160844@qq.com
  * @description:
- *     frames
+ *     链表的应用: 页帧管理的函数实现
  * @usage:
  * @others:
  * @TODO:
