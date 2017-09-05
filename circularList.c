@@ -94,6 +94,7 @@ int cListRemoveNext(CList *list, CListElmt *element, const void **data)
     {
        oldElement = element->next;
        element->next = element->next->next;
+
        if (oldElement == cListHead(list))
        {
            list->head = oldElement->next;
