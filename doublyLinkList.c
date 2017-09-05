@@ -157,7 +157,21 @@ int dListInsertPrevious(DList *list, DListElmt *element, const void *data)
     return 0;
 }
 
-int dListRemoveNext(DList *list, DListElmt *element, const void **data)
+/**
+ * Function: dListRemove
+ * Description:
+ *    该接口可以移除当前指定的元素, 而不是移除指定元素之后的那个元素, 因为每个元素都有一个指向其
+ *    前驱元素的指针
+ * Calls:
+ * Called By:
+ * Input:
+ * Output:
+ * Return:
+ * Table Accessed:
+ * Table Updated:
+ * Others:
+ **/
+int dListRemove(DList *list, DListElmt *element, const void **data)
 {
     if (NULL == element || 0 == dListSize(list))
     {
@@ -166,7 +180,7 @@ int dListRemoveNext(DList *list, DListElmt *element, const void **data)
 
     *data = element->data;
 
-    /* 相当于判断了element->previous是否为NULL, 如果不进行此判断element->previous->next会 */
+    /* 相当于判断了element->previous是否为NULL, 如果不进行此判断, element->previous->next可能会 */
     /* 导致错误. */
     if (list->head == element)
     {

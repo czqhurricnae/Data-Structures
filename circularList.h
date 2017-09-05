@@ -31,7 +31,7 @@ typedef struct CList_
     int size;
     int (*match)(const void *key1, const void *key2);
     void (*destroy)(void *data);
-    CListElmt head;
+    CListElmt *head;
 } CList;
 
 void cListInit(CList *list, void (*destroy)(void *data));
