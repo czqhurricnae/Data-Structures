@@ -34,6 +34,7 @@ typedef struct CList_
     CListElmt *head;
 } CList;
 
+/* Public Interface. */
 void cListInit(CList *list, void (*destroy)(void *data));
 void cListDestroy(CList *list);
 int cListInsertNext(CList *list, CListElmt *element, const void *data);
