@@ -5,7 +5,7 @@
  * @since: 2017-09-05
  * @author: czq | 7160844@qq.com
  * @description:
- *    单向循环链表实现 
+ *    单向循环链表的函数实现
  * @usage:
  * @others:
  * @TODO:
