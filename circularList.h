@@ -1,3 +1,20 @@
+/**
+ *
+ * @copyright:
+ * @file: circularList.h
+ * @since: 2017-09-05
+ * @author: czq | 7160844@qq.com
+ * @description:
+ *    循环链表抽象数据类型的头文件 
+ * @usage:
+ * @others:
+ * @TODO:
+ * @Revision History:
+ * Date            Rel Ver.        Notes
+ * 2017-09-05        1.0             开始创建
+ *
+ **/
+
 #ifndef CIRCULARLIST_H
 #define CIRCULARLIST_H
 
