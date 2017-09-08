@@ -31,9 +31,6 @@ typedef List Stack;
 int stackPush(Stack *stack, const void *data);
 int stackPop(Stack *stack, const void **data);
 #define stackPeek(stack) (NULL == (stack)->head ? NULL : (stack)->head->data)
-
-/* 书本的定义是否不太严谨? */
-/* #define stackSize listSize */
-#define stackSize(stack) ((stack)->size)
+#define stackSize listSize
 
 #endif
