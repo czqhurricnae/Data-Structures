@@ -33,6 +33,6 @@ int queueDequeue(Queue *queue, const void **data);
 
 /* 获取队列头元素的信息而并不使头元素出队 */
 #define queuePeek(queue) (NULL == (queue)->head ? NULL : (queue)->head->data)
-#define queueSize(queue) listSize 
+#define queueSize listSize
 
 #endif    /*QUEUE_H*/
