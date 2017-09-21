@@ -48,8 +48,10 @@ int setRemove(Set *set, const void **data)
 
    for (member = listHead(set); NULL != member; member = listNext(member))
    {
-       if (set->match(*data, listData(member)))
+       if (set->match((const void *) data, (const void *) listData(member)))
+       {
            break;
+       }
        previous = member;
    }
 
@@ -158,7 +160,7 @@ int setIsMember(Set *set, const void *data)
 
    for (member = listHead(set); NULL != member; member = listNext(member))
    {
-       if (set->match(data, listData(member)))
+       if (set->match((const void *) data, (const void *) listData(member)))
        {
            return 1;
        }
