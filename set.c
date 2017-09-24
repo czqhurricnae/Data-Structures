@@ -189,7 +189,7 @@ int setIsSubset(const Set *set1, const Set *set2)
     return 1;
 }
 
-int setisequal(const Set *set1, const Set *set2)
+int setIsEqual(const Set *set1, const Set *set2)
 {
     if (setSize(set1) != setSize(set2))
     {
@@ -198,4 +198,3 @@ int setisequal(const Set *set1, const Set *set2)
 
     return setIsSubset(set1, set2);
 }
-
