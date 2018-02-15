@@ -31,7 +31,7 @@ typedef struct BiTree_
 {
     int size;
     int (*compare)(const void *key1, const void *key2);
-    int (*destroy)(void *data);
+    void (*destroy)(void *data);
     BiTreeNode *root;
 } BiTree;
 
