@@ -19,7 +19,7 @@
 #include <string.h>
 #include "bitree.h"
 
-void bitree_init(BiTree *tree, void (*destroy)(void *data))
+void bitreeInit(BiTree *tree, void (*destroy)(void *data))
 {
     tree->size = 0;
     tree->root = NULL;
@@ -28,10 +28,10 @@ void bitree_init(BiTree *tree, void (*destroy)(void *data))
     return;
 }
 
-void bitree_destroy(BiTree *tree)
+void bitreeDestroy(BiTree *tree)
 {
     /* Remove all the nodes from the tree. */
-    bitree_rem_left(tree, NULL); 
+    bitreeRemoveLeft(tree, NULL); 
 
     /* No operations are allowed now, but clear the structure as a precaution. */
     memset(tree, 0, sizeof(BiTree));
@@ -39,14 +39,14 @@ void bitree_destroy(BiTree *tree)
     return;
 }
 
-int bitree_ins_left(BiTree *tree, BiTreeNode *node, const void *data)
+int bitreeInsertLeft(BiTree *tree, BiTreeNode *node, const void *data)
 {
     BiTreeNode *newNode, **position;
 
     if (NULL == node)
     {
         /* Allow insertion at the root only in an empty tree. */
-        if (0 != bitree_size(tree))
+        if (0 != bitreeSize(tree))
         {
             return -1; 
         } 
@@ -56,7 +56,7 @@ int bitree_ins_left(BiTree *tree, BiTreeNode *node, const void *data)
     else
     {
         /* Normally allow insertion only at the end of a branch. */
-        if (NULL != bitree_left(node))
+        if (NULL != bitreeLeft(node))
         {
             return -1;
         }
@@ -87,7 +87,7 @@ int bitree_ins_right(BiTree *tree, BiTreeNode *node, const void *data)
 
     if (NULL == node)
     {
-        if (0 == bitree_size(tree))
+        if (0 == bitreeSize(tree))
         {
             return -1;
         };
@@ -96,7 +96,7 @@ int bitree_ins_right(BiTree *tree, BiTreeNode *node, const void *data)
     }
     else
     {
-        if (NULL != bitree_right(node))
+        if (NULL != bitreeRight(node))
         {
             return -1;
         }
@@ -119,11 +119,11 @@ int bitree_ins_right(BiTree *tree, BiTreeNode *node, const void *data)
     return 0;
 }
 
-void bitree_rem_left(BiTree *tree, BiTreeNode *node)
+void bitreeRemoveLeft(BiTree *tree, BiTreeNode *node)
 {
     BiTreeNode **position;
 
-    if (0 == bitree_size(tree))
+    if (0 == bitreeSize(tree))
     {
         return;
     }
@@ -139,8 +139,8 @@ void bitree_rem_left(BiTree *tree, BiTreeNode *node)
 
     if (NULL != *position)
     {
-        bitree_rem_left(tree, *position);
-        bitree_rem_right(tree, *position);
+        bitreeRemoveLeft(tree, *position);
+        bitreeRemoveRight(tree, *position);
 
         if (NULL != tree->destroy)
         {
@@ -156,11 +156,11 @@ void bitree_rem_left(BiTree *tree, BiTreeNode *node)
     return;
 }
 
-void bitree_rem_right(BiTree *tree, BiTreeNode *node)
+void bitreeRemoveRight(BiTree *tree, BiTreeNode *node)
 {
     BiTreeNode **position;
 
-    if (0 == bitree_size(tree))
+    if (0 == bitreeSize(tree))
     {
         return;
     }
@@ -176,8 +176,8 @@ void bitree_rem_right(BiTree *tree, BiTreeNode *node)
 
     if (NULL != *position)
     {
-        bitree_rem_left(tree, *position);
-        bitree_rem_right(tree, *position);
+        bitreeRemoveLeft(tree, *position);
+        bitreeRemoveRight(tree, *position);
 
         if (NULL != tree->destroy)
         {
@@ -195,17 +195,17 @@ void bitree_rem_right(BiTree *tree, BiTreeNode *node)
 
 int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data)
 {
-   bitree_init(merge, left->destroy); 
+   bitreeInit(merge, left->destroy); 
 
-   if (0 != bitree_ins_left(merge, NULL, data))
+   if (0 != bitreeInsertLeft(merge, NULL, data))
    {
-       bitree_destroy(merge);
+       bitreeDestroy(merge);
        return -1;
    }
 
-   bitree_root(merge)->left = bitree_root(left);
-   bitree_root(merge)->right = bitree_root(right);
-   merge->size = merge->size + bitree_size(left)+ bitree_size(right);
+   bitreeRoot(merge)->left = bitreeRoot(left);
+   bitreeRoot(merge)->right = bitreeRoot(right);
+   merge->size = merge->size + bitreeSize(left)+ bitreeSize(right);
 
    /* Do not let the original trees access the merged nodes. */
    left->root = NULL;
