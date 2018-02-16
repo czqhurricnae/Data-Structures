@@ -81,7 +81,7 @@ int bitreeInsertLeft(BiTree *tree, BiTreeNode *node, const void *data)
     return 0;
 }
 
-int bitree_ins_right(BiTree *tree, BiTreeNode *node, const void *data)
+int bitreeInsRight(BiTree *tree, BiTreeNode *node, const void *data)
 {
     BiTreeNode *newNode, **position;
 
@@ -193,7 +193,7 @@ void bitreeRemoveRight(BiTree *tree, BiTreeNode *node)
     return;
 }
 
-int bitree_merge(BiTree *merge, BiTree *left, BiTree *right, const void *data)
+int bitreeMerge(BiTree *merge, BiTree *left, BiTree *right, const void *data)
 {
    bitreeInit(merge, left->destroy); 
 
