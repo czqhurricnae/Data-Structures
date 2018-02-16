@@ -18,7 +18,6 @@
 #define QUEUE_H
 
 #include <stdlib.h>
-
 #include "linkList.h"
 
 /* Implement queue ad linked lists. */
