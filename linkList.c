@@ -74,6 +74,7 @@ void listDestroy(List *list)
 
     /* No operations are allowed now, but clear the structure as a precaution. */
     memset(list, 0, sizeof(List));
+
     return ;
 }
 
